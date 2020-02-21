@@ -41,9 +41,11 @@
     (unless (file-directory-p pkg-conf-dir)
       (make-directory pkg-conf-dir))
     (add-to-list 'load-path pkg-conf-dir)
-    (if (file-exists-p init-filename)
+    (message "pkg-conf-dir: %s" pkg-conf-dir)
+    (message "init-sym: %s" init-sym)
+    (if (file-exists-p (concat (file-name-as-directory pkg-conf-dir) init-filename))
 	(require (intern init-sym))
-      (message "file: %s not found" init-filename)))) ;; init packages in pkg-list
+      (message "file: %s not found" (concat pkg-conf-dir init-filename))))) ;; init packages in pkg-list
 
 ;; (dolist (pkg pkg-list)
 ;;   (message (symbol-name (intern (concat init-prefix (symbol-name (symbol-value 'pkg)))))))
